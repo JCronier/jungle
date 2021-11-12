@@ -2,7 +2,7 @@ class Admin::CategoriesController < ApplicationController
   http_basic_authenticate_with :name => ENV["USERNAME"], :password => ENV["PASSWORD"]
 
   def index
-    @categories = Category.order(id: :desc).all
+    @categories = Category.order(:name).all
     @counts = Product.group(:category_id).count
   end
 
