@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%= category.name %>
+  </td>
+  <td class="col-md-2">
+    <% if @counts[category.id] %>
+      <%= @counts[category.id] %>
+    <% else %>
+      0
+    <% end %>
+  </td>
+</tr>
