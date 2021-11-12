@@ -20,10 +20,17 @@
             </div>
           <% end %>
 
-            <div class="form-group">Name: <%= f.text_field :name, class: 'form-control' %></div>
-            <div class="form-group">Email: <%= f.text_field :email, class: 'form-control' %></div>
-            <div class="form-group">Password: <%= f.password_field :password, class: 'form-control' %></div>
-            <div class="form-group"> Password Confirmation: <%= f.password_field :password_confirmation, class: 'form-control' %></div>
+            <div class="form-group">
+              <strong>Name</strong> <%= f.text_field :name, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+            <strong>Email</strong> <%= f.text_field :email, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+            <strong>Password</strong> <%= f.password_field :password, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+            <strong>Password Confirmation</strong> <%= f.password_field :password_confirmation, class: 'form-control' %></div>
 
           <%= f.submit "Submit" , class: 'btn btn-primary' %>
 

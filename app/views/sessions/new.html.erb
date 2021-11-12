@@ -18,8 +18,12 @@
             </div>
           <% end %>
 
-            <div class="form-group">Email: <%= form.text_field :email, class: "form-control" %></div>
-            <div class="form-group">Password: <%= form.password_field :password, class: "form-control" %></div>
+            <div class="form-group">
+              <strong>Email</strong> <%= form.text_field :email, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <strong>Password</strong> <%= form.password_field :password, class: "form-control" %>
+            </div>
 
           <%= form.submit "Submit" , class: 'btn btn-primary' %>
 
