@@ -6,8 +6,8 @@ RSpec.describe Product, type: :model do
     it "saves with valid attributes" do
       @category = Category.find(1)
       @product = Product.new(name: "product", price: 100, quantity: 2, category: @category)
-      @product.save!
-      expect(@product).to be_present
+      @product.save
+      expect(@product).to be_valid
     end
     it "does not save without a name" do
       @category = Category.find(1)
