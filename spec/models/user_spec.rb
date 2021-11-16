@@ -53,4 +53,49 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to eq(["Password confirmation can't be blank"])
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it "should return a user" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials(@user.email, @user.password)
+      expect(@user_auth).to_not be_nil
+    end
+    it "should be nil if email empty" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials(nil, @user.password)
+      expect(@user_auth).to be_nil
+    end
+    it "should be nil if password empty" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials(@user.email, nil)
+      expect(@user_auth).to be_nil
+    end
+    it "should be nil if password incorrect" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials(@user.email, "passwor")
+      expect(@user_auth).to be_nil
+    end
+    it "should be nil if email incorrect" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials("johnsmith@gmail.co", @user.password)
+      expect(@user_auth).to be_nil
+    end
+    it "should return a user is trailing spaces in email" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials("   johnsmith@gmail.com   ", @user.password)
+      expect(@user_auth).to_not be_nil
+    end
+    it "should return a user if wrong case in email used" do
+      @user = User.new(name: "John Smith", email: "johnsmith@gmail.com", password: "password", password_confirmation: "password")
+      @user.save
+      @user_auth = User.authenticate_with_credentials("johnSMITH@gmail.com", @user.password)
+      expect(@user_auth).to_not be_nil
+    end
+  end
 end
