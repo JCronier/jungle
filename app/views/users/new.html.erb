@@ -13,7 +13,7 @@
             <div class="alert alert-danger">
               <strong>Sign up errors:</strong>
               <ul>
-                <% @user.errors.full_messages.each do |error| %>
+                <% @user.errors.full_messages.uniq.each do |error| %>
                   <li><%= error %></li>
                 <% end %>
               </ul>
